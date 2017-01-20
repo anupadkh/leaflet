@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>http://leafletjs.com/examples/geojson/example.html</title><link rel="stylesheet" type="text/css" href="http:_leafletjs.com_examples_geojson_example_files/viewsource.css"></head><body id="viewsource" class="highlight" style="-moz-tab-size: 4" contextmenu="actions"><pre id="line1"><span></span><span class="doctype">&lt;!DOCTYPE html&gt;</span><span>
+<span id="line2"></span></span><span>&lt;<span class="start-tag">html</span>&gt;</span><span>
+<span id="line3"></span></span><span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+<span id="line4"></span>	
+<span id="line5"></span>	</span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>GeoJSON tutorial - Leaflet</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+<span id="line6"></span>
+<span id="line7"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>="<a class="attribute-value">utf-8</a>" <span>/</span>&gt;</span><span>
+<span id="line8"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>="<a class="attribute-value">viewport</a>" <span class="attribute-name">content</span>="<a class="attribute-value">width=device-width, initial-scale=1.0</a>"&gt;</span><span>
+<span id="line9"></span>	
+<span id="line10"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">shortcut icon</a>" <span class="attribute-name">type</span>="<a class="attribute-value">image/x-icon</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://leafletjs.com/examples/geojson/docs/images/favicon.ico">docs/images/favicon.ico</a>" <span>/</span>&gt;</span><span>
+<span id="line11"></span>
+<span id="line12"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">https://unpkg.com/leaflet@1.0.2/dist/leaflet.css</a>" <span>/</span>&gt;</span><span>
+<span id="line13"></span>	</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.js">https://unpkg.com/leaflet@1.0.2/dist/leaflet.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line14"></span>
+<span id="line15"></span>
+<span id="line16"></span>	</span><span>&lt;<span class="start-tag">style</span>&gt;</span><span>
+<span id="line17"></span>		#map {
+<span id="line18"></span>			width: 600px;
+<span id="line19"></span>			height: 400px;
+<span id="line20"></span>		}
+<span id="line21"></span>	</span><span>&lt;/<span class="end-tag">style</span>&gt;</span><span>
+<span id="line22"></span>
+<span id="line23"></span>	
+<span id="line24"></span></span><span>&lt;/<span class="end-tag">head</span>&gt;</span><span>
+<span id="line25"></span></span><span>&lt;<span class="start-tag">body</span>&gt;</span><span>
+<span id="line26"></span>
+<span id="line27"></span></span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>='<a class="attribute-value">map</a>'&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line28"></span>
+<span id="line29"></span></span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://leafletjs.com/examples/geojson/sample-geojson.js">sample-geojson.js</a>" <span class="attribute-name">type</span>="<a class="attribute-value">text/javascript</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line30"></span>
+<span id="line31"></span></span><span>&lt;<span class="start-tag">script</span>&gt;</span><span>
+<span id="line32"></span>	var map = L.map('map').setView([39.74739, -105], 13);
+<span id="line33"></span>
+<span id="line34"></span>	
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw',
+ {
+<span id="line35"></span>		maxZoom: 18,
+<span id="line36"></span>		attribution: 'Map data &amp;copy; </span><span>&lt;a</span><span> href="http://openstreetmap.org"&gt;OpenStreetMap</span><span>&lt;/<span></span>a</span><span>&gt; contributors, ' +
+<span id="line37"></span>			'</span><span>&lt;a</span><span> href="http://creativecommons.org/licenses/by-sa/2.0/"&gt;CC-BY-SA</span><span>&lt;/<span></span>a</span><span>&gt;, ' +
+<span id="line38"></span>			'Imagery © </span><span>&lt;a</span><span> href="http://mapbox.com"&gt;Mapbox</span><span>&lt;/<span></span>a</span><span>&gt;',
+<span id="line39"></span>		id: 'mapbox.light'
+<span id="line40"></span>	}).addTo(map);
+<span id="line41"></span>
+<span id="line42"></span>	var baseballIcon = L.icon({
+<span id="line43"></span>		iconUrl: 'baseball-marker.png',
+<span id="line44"></span>		iconSize: [32, 37],
+<span id="line45"></span>		iconAnchor: [16, 37],
+<span id="line46"></span>		popupAnchor: [0, -28]
+<span id="line47"></span>	});
+<span id="line48"></span>
+<span id="line49"></span>	function onEachFeature(feature, layer) {
+<span id="line50"></span>		var popupContent = "</span><span>&lt;p</span><span>&gt;I started out as a GeoJSON " +
+<span id="line51"></span>				feature.geometry.type + ", but now I'm a Leaflet vector!</span><span>&lt;/<span></span>p</span><span>&gt;";
+<span id="line52"></span>
+<span id="line53"></span>		if (feature.properties &amp;&amp; feature.properties.popupContent) {
+<span id="line54"></span>			popupContent += feature.properties.popupContent;
+<span id="line55"></span>		}
+<span id="line56"></span>
+<span id="line57"></span>		layer.bindPopup(popupContent);
+<span id="line58"></span>	}
+<span id="line59"></span>
+<span id="line60"></span>	L.geoJSON([bicycleRental, campus], {
+<span id="line61"></span>
+<span id="line62"></span>		style: function (feature) {
+<span id="line63"></span>			return feature.properties &amp;&amp; feature.properties.style;
+<span id="line64"></span>		},
+<span id="line65"></span>
+<span id="line66"></span>		onEachFeature: onEachFeature,
+<span id="line67"></span>
+<span id="line68"></span>		pointToLayer: function (feature, latlng) {
+<span id="line69"></span>			return L.circleMarker(latlng, {
+<span id="line70"></span>				radius: 8,
+<span id="line71"></span>				fillColor: "#ff7800",
+<span id="line72"></span>				color: "#000",
+<span id="line73"></span>				weight: 1,
+<span id="line74"></span>				opacity: 1,
+<span id="line75"></span>				fillOpacity: 0.8
+<span id="line76"></span>			});
+<span id="line77"></span>		}
+<span id="line78"></span>	}).addTo(map);
+<span id="line79"></span>
+<span id="line80"></span>	L.geoJSON(freeBus, {
+<span id="line81"></span>
+<span id="line82"></span>		filter: function (feature, layer) {
+<span id="line83"></span>			if (feature.properties) {
+<span id="line84"></span>				// If the property "underConstruction" exists and is true, return false (don't render features under construction)
+<span id="line85"></span>				return feature.properties.underConstruction !== undefined ? !feature.properties.underConstruction : true;
+<span id="line86"></span>			}
+<span id="line87"></span>			return false;
+<span id="line88"></span>		},
+<span id="line89"></span>
+<span id="line90"></span>		onEachFeature: onEachFeature
+<span id="line91"></span>	}).addTo(map);
+<span id="line92"></span>
+<span id="line93"></span>	var coorsLayer = L.geoJSON(coorsField, {
+<span id="line94"></span>
+<span id="line95"></span>		pointToLayer: function (feature, latlng) {
+<span id="line96"></span>			return L.marker(latlng, {icon: baseballIcon});
+<span id="line97"></span>		},
+<span id="line98"></span>
+<span id="line99"></span>		onEachFeature: onEachFeature
+<span id="line100"></span>	}).addTo(map);
+<span id="line101"></span>
+<span id="line102"></span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line103"></span>
+<span id="line104"></span>
+<span id="line105"></span>
+<span id="line106"></span></span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+<span id="line107"></span></span><span>&lt;/<span class="end-tag">html</span>&gt;</span><span>
+<span id="line108"></span></span></pre><menu type="context" id="actions"><menuitem id="goToLine" label="Go to Line…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Wrap Long Lines" type="checkbox"></menuitem><menuitem id="highlightSyntax" label="Syntax Highlighting" type="checkbox" checked="true"></menuitem></menu></body></html>

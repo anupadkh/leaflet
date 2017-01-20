@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>http://leafletjs.com/examples/choropleth/example.html</title><link rel="stylesheet" type="text/css" href="http:_leafletjs.com_examples_choropleth_example_files/viewsource.css"></head><body id="viewsource" class="highlight" style="-moz-tab-size: 4" contextmenu="actions"><pre id="line1"><span></span><span class="doctype">&lt;!DOCTYPE html&gt;</span><span>
+<span id="line2"></span></span><span>&lt;<span class="start-tag">html</span>&gt;</span><span>
+<span id="line3"></span></span><span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+<span id="line4"></span>	
+<span id="line5"></span>	</span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>Choropleth Tutorial - Leaflet</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+<span id="line6"></span>
+<span id="line7"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>="<a class="attribute-value">utf-8</a>" <span>/</span>&gt;</span><span>
+<span id="line8"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>="<a class="attribute-value">viewport</a>" <span class="attribute-name">content</span>="<a class="attribute-value">width=device-width, initial-scale=1.0</a>"&gt;</span><span>
+<span id="line9"></span>	
+<span id="line10"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">shortcut icon</a>" <span class="attribute-name">type</span>="<a class="attribute-value">image/x-icon</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://leafletjs.com/examples/choropleth/docs/images/favicon.ico">docs/images/favicon.ico</a>" <span>/</span>&gt;</span><span>
+<span id="line11"></span>
+<span id="line12"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">https://unpkg.com/leaflet@1.0.2/dist/leaflet.css</a>" <span>/</span>&gt;</span><span>
+<span id="line13"></span>	</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.js">https://unpkg.com/leaflet@1.0.2/dist/leaflet.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line14"></span>
+<span id="line15"></span>
+<span id="line16"></span>	</span><span>&lt;<span class="start-tag">style</span>&gt;</span><span>
+<span id="line17"></span>		#map {
+<span id="line18"></span>			width: 600px;
+<span id="line19"></span>			height: 400px;
+<span id="line20"></span>		}
+<span id="line21"></span>	</span><span>&lt;/<span class="end-tag">style</span>&gt;</span><span>
+<span id="line22"></span>
+<span id="line23"></span>	</span><span>&lt;<span class="start-tag">style</span>&gt;</span><span>#map { width: 800px; height: 500px; }
+<span id="line24"></span>.info { padding: 6px 8px; font: 14px/16px 
+Arial, Helvetica, sans-serif; background: white; background: 
+rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); 
+border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+<span id="line25"></span>.legend { text-align: left; line-height: 18px; 
+color: #555; } .legend i { width: 18px; height: 18px; float: left; 
+margin-right: 8px; opacity: 0.7; }</span><span>&lt;/<span class="end-tag">style</span>&gt;</span><span>
+<span id="line26"></span></span><span>&lt;/<span class="end-tag">head</span>&gt;</span><span>
+<span id="line27"></span></span><span>&lt;<span class="start-tag">body</span>&gt;</span><span>
+<span id="line28"></span>
+<span id="line29"></span></span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>='<a class="attribute-value">map</a>'&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line30"></span>
+<span id="line31"></span></span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">type</span>="<a class="attribute-value">text/javascript</a>" <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:http://leafletjs.com/examples/choropleth/us-states.js">us-states.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line32"></span>
+<span id="line33"></span></span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">type</span>="<a class="attribute-value">text/javascript</a>"&gt;</span><span>
+<span id="line34"></span>
+<span id="line35"></span>	var map = L.map('map').setView([37.8, -96], 4);
+<span id="line36"></span>
+<span id="line37"></span>	
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw',
+ {
+<span id="line38"></span>		maxZoom: 18,
+<span id="line39"></span>		attribution: 'Map data &amp;copy; </span><span>&lt;a</span><span> href="http://openstreetmap.org"&gt;OpenStreetMap</span><span>&lt;/<span></span>a</span><span>&gt; contributors, ' +
+<span id="line40"></span>			'</span><span>&lt;a</span><span> href="http://creativecommons.org/licenses/by-sa/2.0/"&gt;CC-BY-SA</span><span>&lt;/<span></span>a</span><span>&gt;, ' +
+<span id="line41"></span>			'Imagery © </span><span>&lt;a</span><span> href="http://mapbox.com"&gt;Mapbox</span><span>&lt;/<span></span>a</span><span>&gt;',
+<span id="line42"></span>		id: 'mapbox.light'
+<span id="line43"></span>	}).addTo(map);
+<span id="line44"></span>
+<span id="line45"></span>
+<span id="line46"></span>	// control that shows state info on hover
+<span id="line47"></span>	var info = L.control();
+<span id="line48"></span>
+<span id="line49"></span>	info.onAdd = function (map) {
+<span id="line50"></span>		this._div = L.DomUtil.create('div', 'info');
+<span id="line51"></span>		this.update();
+<span id="line52"></span>		return this._div;
+<span id="line53"></span>	};
+<span id="line54"></span>
+<span id="line55"></span>	info.update = function (props) {
+<span id="line56"></span>		this._div.innerHTML = '</span><span>&lt;h</span><span>4&gt;US Population Density</span><span>&lt;/<span></span>h</span><span>4&gt;' +  (props ?
+<span id="line57"></span>			'</span><span>&lt;b</span><span>&gt;' + props.name + '</span><span>&lt;/<span></span>b</span><span>&gt;</span><span>&lt;b</span><span>r /&gt;' + props.density + ' people / mi</span><span>&lt;s</span><span>up&gt;2</span><span>&lt;/<span>s</span>u</span><span>p&gt;'
+<span id="line58"></span>			: 'Hover over a state');
+<span id="line59"></span>	};
+<span id="line60"></span>
+<span id="line61"></span>	info.addTo(map);
+<span id="line62"></span>
+<span id="line63"></span>
+<span id="line64"></span>	// get color depending on population density value
+<span id="line65"></span>	function getColor(d) {
+<span id="line66"></span>		return d &gt; 1000 ? '#800026' :
+<span id="line67"></span>				d &gt; 500  ? '#BD0026' :
+<span id="line68"></span>				d &gt; 200  ? '#E31A1C' :
+<span id="line69"></span>				d &gt; 100  ? '#FC4E2A' :
+<span id="line70"></span>				d &gt; 50   ? '#FD8D3C' :
+<span id="line71"></span>				d &gt; 20   ? '#FEB24C' :
+<span id="line72"></span>				d &gt; 10   ? '#FED976' :
+<span id="line73"></span>							'#FFEDA0';
+<span id="line74"></span>	}
+<span id="line75"></span>
+<span id="line76"></span>	function style(feature) {
+<span id="line77"></span>		return {
+<span id="line78"></span>			weight: 2,
+<span id="line79"></span>			opacity: 1,
+<span id="line80"></span>			color: 'white',
+<span id="line81"></span>			dashArray: '3',
+<span id="line82"></span>			fillOpacity: 0.7,
+<span id="line83"></span>			fillColor: getColor(feature.properties.density)
+<span id="line84"></span>		};
+<span id="line85"></span>	}
+<span id="line86"></span>
+<span id="line87"></span>	function highlightFeature(e) {
+<span id="line88"></span>		var layer = e.target;
+<span id="line89"></span>
+<span id="line90"></span>		layer.setStyle({
+<span id="line91"></span>			weight: 5,
+<span id="line92"></span>			color: '#666',
+<span id="line93"></span>			dashArray: '',
+<span id="line94"></span>			fillOpacity: 0.7
+<span id="line95"></span>		});
+<span id="line96"></span>
+<span id="line97"></span>		if (!L.Browser.ie &amp;&amp; !L.Browser.opera &amp;&amp; !L.Browser.edge) {
+<span id="line98"></span>			layer.bringToFront();
+<span id="line99"></span>		}
+<span id="line100"></span>
+<span id="line101"></span>		info.update(layer.feature.properties);
+<span id="line102"></span>	}
+<span id="line103"></span>
+<span id="line104"></span>	var geojson;
+<span id="line105"></span>
+<span id="line106"></span>	function resetHighlight(e) {
+<span id="line107"></span>		geojson.resetStyle(e.target);
+<span id="line108"></span>		info.update();
+<span id="line109"></span>	}
+<span id="line110"></span>
+<span id="line111"></span>	function zoomToFeature(e) {
+<span id="line112"></span>		map.fitBounds(e.target.getBounds());
+<span id="line113"></span>	}
+<span id="line114"></span>
+<span id="line115"></span>	function onEachFeature(feature, layer) {
+<span id="line116"></span>		layer.on({
+<span id="line117"></span>			mouseover: highlightFeature,
+<span id="line118"></span>			mouseout: resetHighlight,
+<span id="line119"></span>			click: zoomToFeature
+<span id="line120"></span>		});
+<span id="line121"></span>	}
+<span id="line122"></span>
+<span id="line123"></span>	geojson = L.geoJson(statesData, {
+<span id="line124"></span>		style: style,
+<span id="line125"></span>		onEachFeature: onEachFeature
+<span id="line126"></span>	}).addTo(map);
+<span id="line127"></span>
+<span id="line128"></span>	map.attributionControl.addAttribution('Population data &amp;copy; </span><span>&lt;a</span><span> href="http://census.gov/"&gt;US Census Bureau</span><span>&lt;/<span></span>a</span><span>&gt;');
+<span id="line129"></span>
+<span id="line130"></span>
+<span id="line131"></span>	var legend = L.control({position: 'bottomright'});
+<span id="line132"></span>
+<span id="line133"></span>	legend.onAdd = function (map) {
+<span id="line134"></span>
+<span id="line135"></span>		var div = L.DomUtil.create('div', 'info legend'),
+<span id="line136"></span>			grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+<span id="line137"></span>			labels = [],
+<span id="line138"></span>			from, to;
+<span id="line139"></span>
+<span id="line140"></span>		for (var i = 0; i </span><span>&lt; </span><span>grades.length; i++) {
+<span id="line141"></span>			from = grades[i];
+<span id="line142"></span>			to = grades[i + 1];
+<span id="line143"></span>
+<span id="line144"></span>			labels.push(
+<span id="line145"></span>				'</span><span>&lt;i</span><span> style="background:' + getColor(from + 1) + '"&gt;</span><span>&lt;/<span></span>i</span><span>&gt; ' +
+<span id="line146"></span>				from + (to ? '&amp;ndash;' + to : '+'));
+<span id="line147"></span>		}
+<span id="line148"></span>
+<span id="line149"></span>		div.innerHTML = labels.join('</span><span>&lt;b</span><span>r&gt;');
+<span id="line150"></span>		return div;
+<span id="line151"></span>	};
+<span id="line152"></span>
+<span id="line153"></span>	legend.addTo(map);
+<span id="line154"></span>
+<span id="line155"></span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line156"></span>
+<span id="line157"></span>
+<span id="line158"></span>
+<span id="line159"></span></span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+<span id="line160"></span></span><span>&lt;/<span class="end-tag">html</span>&gt;</span><span>
+<span id="line161"></span></span></pre><menu type="context" id="actions"><menuitem id="goToLine" label="Go to Line…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Wrap Long Lines" type="checkbox"></menuitem><menuitem id="highlightSyntax" label="Syntax Highlighting" type="checkbox" checked="true"></menuitem></menu></body></html>

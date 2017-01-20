@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>http://leafletjs.com/examples/custom-icons/example.html</title><link rel="stylesheet" type="text/css" href="http:_leafletjs.com_examples_custom-icons_example_files/viewsource.css"></head><body id="viewsource" class="highlight" style="-moz-tab-size: 4" contextmenu="actions"><pre id="line1"><span></span><span class="doctype">&lt;!DOCTYPE html&gt;</span><span>
+<span id="line2"></span></span><span>&lt;<span class="start-tag">html</span>&gt;</span><span>
+<span id="line3"></span></span><span>&lt;<span class="start-tag">head</span>&gt;</span><span>
+<span id="line4"></span>	
+<span id="line5"></span>	</span><span>&lt;<span class="start-tag">title</span>&gt;</span><span>Custom Icons Tutorial - Leaflet</span><span>&lt;/<span class="end-tag">title</span>&gt;</span><span>
+<span id="line6"></span>
+<span id="line7"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">charset</span>="<a class="attribute-value">utf-8</a>" <span>/</span>&gt;</span><span>
+<span id="line8"></span>	</span><span>&lt;<span class="start-tag">meta</span> <span class="attribute-name">name</span>="<a class="attribute-value">viewport</a>" <span class="attribute-name">content</span>="<a class="attribute-value">width=device-width, initial-scale=1.0</a>"&gt;</span><span>
+<span id="line9"></span>	
+<span id="line10"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">shortcut icon</a>" <span class="attribute-name">type</span>="<a class="attribute-value">image/x-icon</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:http://leafletjs.com/examples/custom-icons/docs/images/favicon.ico">docs/images/favicon.ico</a>" <span>/</span>&gt;</span><span>
+<span id="line11"></span>
+<span id="line12"></span>	</span><span>&lt;<span class="start-tag">link</span> <span class="attribute-name">rel</span>="<a class="attribute-value">stylesheet</a>" <span class="attribute-name">href</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.css">https://unpkg.com/leaflet@1.0.2/dist/leaflet.css</a>" <span>/</span>&gt;</span><span>
+<span id="line13"></span>	</span><span>&lt;<span class="start-tag">script</span> <span class="attribute-name">src</span>="<a class="attribute-value" href="view-source:https://unpkg.com/leaflet@1.0.2/dist/leaflet.js">https://unpkg.com/leaflet@1.0.2/dist/leaflet.js</a>"&gt;</span><span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line14"></span>
+<span id="line15"></span>
+<span id="line16"></span>	</span><span>&lt;<span class="start-tag">style</span>&gt;</span><span>
+<span id="line17"></span>		#map {
+<span id="line18"></span>			width: 600px;
+<span id="line19"></span>			height: 400px;
+<span id="line20"></span>		}
+<span id="line21"></span>	</span><span>&lt;/<span class="end-tag">style</span>&gt;</span><span>
+<span id="line22"></span>
+<span id="line23"></span>	
+<span id="line24"></span></span><span>&lt;/<span class="end-tag">head</span>&gt;</span><span>
+<span id="line25"></span></span><span>&lt;<span class="start-tag">body</span>&gt;</span><span>
+<span id="line26"></span>
+<span id="line27"></span></span><span>&lt;<span class="start-tag">div</span> <span class="attribute-name">id</span>='<a class="attribute-value">map</a>'&gt;</span><span></span><span>&lt;/<span class="end-tag">div</span>&gt;</span><span>
+<span id="line28"></span>
+<span id="line29"></span></span><span>&lt;<span class="start-tag">script</span>&gt;</span><span>
+<span id="line30"></span>	var map = L.map('map').setView([51.5, -0.09], 13);
+<span id="line31"></span>
+<span id="line32"></span>	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+<span id="line33"></span>		attribution: '&amp;copy; </span><span>&lt;a</span><span> href="http://osm.org/copyright"&gt;OpenStreetMap</span><span>&lt;/<span></span>a</span><span>&gt; contributors'
+<span id="line34"></span>	}).addTo(map);
+<span id="line35"></span>
+<span id="line36"></span>	var LeafIcon = L.Icon.extend({
+<span id="line37"></span>		options: {
+<span id="line38"></span>			shadowUrl: 'leaf-shadow.png',
+<span id="line39"></span>			iconSize:     [38, 95],
+<span id="line40"></span>			shadowSize:   [50, 64],
+<span id="line41"></span>			iconAnchor:   [22, 94],
+<span id="line42"></span>			shadowAnchor: [4, 62],
+<span id="line43"></span>			popupAnchor:  [-3, -76]
+<span id="line44"></span>		}
+<span id="line45"></span>	});
+<span id="line46"></span>
+<span id="line47"></span>	var greenIcon = new LeafIcon({iconUrl: 'leaf-green.png'}),
+<span id="line48"></span>		redIcon = new LeafIcon({iconUrl: 'leaf-red.png'}),
+<span id="line49"></span>		orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+<span id="line50"></span>
+<span id="line51"></span>	L.marker([51.5, -0.09], {icon: greenIcon}).bindPopup("I am a green leaf.").addTo(map);
+<span id="line52"></span>	L.marker([51.495, -0.083], {icon: redIcon}).bindPopup("I am a red leaf.").addTo(map);
+<span id="line53"></span>	L.marker([51.49, -0.1], {icon: orangeIcon}).bindPopup("I am an orange leaf.").addTo(map);
+<span id="line54"></span>
+<span id="line55"></span></span><span>&lt;/<span class="end-tag">script</span>&gt;</span><span>
+<span id="line56"></span>
+<span id="line57"></span>
+<span id="line58"></span>
+<span id="line59"></span></span><span>&lt;/<span class="end-tag">body</span>&gt;</span><span>
+<span id="line60"></span></span><span>&lt;/<span class="end-tag">html</span>&gt;</span><span>
+<span id="line61"></span></span></pre><menu type="context" id="actions"><menuitem id="goToLine" label="Go to Line…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Wrap Long Lines" type="checkbox"></menuitem><menuitem id="highlightSyntax" label="Syntax Highlighting" type="checkbox" checked="true"></menuitem></menu></body></html>
